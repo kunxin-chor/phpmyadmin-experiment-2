@@ -1,5 +1,12 @@
 FROM gitpod/workspace-mysql
 
+RUN sudo apt-get update && \
+    sudo env="DEBIAN_FRONTEND=noninteractive" apt-get install -y phpmyadmin && \
+    sudo rm -rf /var/lib/apt/lists/*
+
+COPY phpmyadmin.conf /etc/dbconfig-common/phpmyadmin.conf
+RUN sudo dpkg-reconfigure --frontend=noninteractive phpmyadmin
+
 USER root
 # Setup Heroku CLI
 RUN curl https://cli-assets.heroku.com/install.sh | sh
