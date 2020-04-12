@@ -1,5 +1,7 @@
 FROM gitpod/workspace-mysql
 
+RUN echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2" | debconf-set-selections
+
 RUN sudo apt-get update && \
     sudo env="DEBIAN_FRONTEND=noninteractive" apt-get install -y phpmyadmin && \
     sudo rm -rf /var/lib/apt/lists/*
